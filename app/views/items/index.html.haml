@@ -1,0 +1,20 @@
+.col-sm-3.sidebar
+  .tree= render partial: 'folder', collection: Folder.roots.order(:name)
+
+.col-sm-4.main
+  %table.table.table-hover.table-condensed
+    %thead
+      %th Name
+      %th Date Created
+    %tbody
+      - @items.each do |item|
+        %tr
+          %td= link_to item.name, items_path(folder_id: @folder.id, item_id: item.id)
+          %td= item.created_at.strftime '%b %e, %y, %l:%M %p'
+  %br
+  = render 'form'
+
+.col-sm-5.main
+  - if @item
+    = link_to @item.asset.url(resource_type: "image", format: "#{@item.asset.format}.pdf") do
+      = cl_image_tag @item.asset.url(resource_type: "image", format: "#{@item.asset.format}.png"), class: 'img-responsive'

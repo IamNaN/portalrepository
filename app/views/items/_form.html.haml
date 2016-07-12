@@ -1,0 +1,15 @@
+= form_for Item.new, html: {class: 'form-horizontal new-file'} do |f|
+  = f.hidden_field(:folder_id, value: @folder.id)
+  = f.hidden_field(:asset_cache)
+
+  .form-group
+    = f.label :asset, 'File', class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.file_field :asset
+
+  .form-group
+    = f.label :name, 'Description', class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :name, class: 'form-control'
+
+  = f.submit 'Upload', class: 'btn btn-primary btn-xs'

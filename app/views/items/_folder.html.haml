@@ -1,0 +1,9 @@
+%ul
+  %li{ class: ('selected' if @folder.id == folder.id) }
+    - if @folder.id == folder.id
+      = icon('folder-open')
+    - else
+      = icon('folder-o')
+    = link_to folder.name, items_path(folder_id: folder.id)
+    - if folder.children
+      = render partial: 'folder', collection: folder.children.order(:name)

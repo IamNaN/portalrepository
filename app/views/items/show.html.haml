@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @item.name
+%p
+  %b Folder:
+  = @item.folder
+%p
+  %b Asset:
+  = @item.asset
+%p
+  %b Guid:
+  = @item.guid
+
+= link_to 'Edit', edit_item_path(@item)
+\|
+= link_to 'Back', items_path
