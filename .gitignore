@@ -18,3 +18,5 @@
 
 config/cloudinary.yml
 public/uploads
+
+erd.pdf
