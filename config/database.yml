@@ -79,7 +79,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: aperture_production
-  username: aperture
-  password: <%= ENV['APERTURE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
