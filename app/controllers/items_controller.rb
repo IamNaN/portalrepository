@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to :back, notice: 'Item was successfully created.' }
+        format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -65,18 +65,17 @@ class ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
-    def set_folder
-      @folder = Folder.find(params[:folder_id]) if params[:folder_id].present?
-      @folder ||= Folder.first
-    end
+  def set_folder
+    @folder = Folder.find(params[:folder_id]) if params[:folder_id].present?
+    @folder ||= Folder.first
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def item_params
-      params.require(:item).permit(:name, :folder_id, :asset, :guid)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def item_params
+    params.require(:item).permit(:name, :folder_id, :asset, :guid)
+  end
 end

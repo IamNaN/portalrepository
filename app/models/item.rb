@@ -1,4 +1,4 @@
-class Item < ApplicationRecord
+class Item < ActiveRecord::Base
   belongs_to :folder
   mount_uploader :asset, AssetUploader
   attr_accessor :content_type

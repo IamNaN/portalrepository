@@ -1,20 +1,7 @@
-def wipeout(table)
-  puts "wiping out #{table.pluralize}"
-  table.singularize.classify.constantize.destroy_all
-  ActiveRecord::Base.connection.reset_pk_sequence!(table.downcase.pluralize)
-end
-
-wipeout 'Item'
-wipeout 'Folder'
-
-root = Folder.create(name: '2016')
-dist = Folder.create(name: 'Seattle Public Schools', parent: root)
-fhs = Folder.create name: 'Franklin High School', parent: dist
-ghs = Folder.create name: 'Garfield High School', parent: dist
-ihs = Folder.create name: 'Ingraham High School', parent: dist
-
-[ghs, fhs, ihs].each do |school|
-  Folder.create name: 'Stuff', parent: school
-  Folder.create name: 'More Stuff', parent: school
-  Folder.create name: 'Even More Stuff', parent: school
-end
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create(name: 'Emanuel', city: cities.first)
