@@ -18,17 +18,29 @@ form.new-file {
 
 .sidebar, .main {
   padding: 1em;
+  border-right: 1px solid #dddddd;
+}
+
+tr.selected td {
+  font-weight: bold;
 }
 
 .tree {
   padding: 1em;
-  background-color: #d9edf7;
-  ul { padding-left: 1em;}
+  ul {
+    background-color: #fff;
+    padding-left: 1em;
+  }
   li {
     list-style-type: none !important;
     color: #428bca;
     &.selected {
-      & > a { font-weight: bold; }
+      background-color: #428bca;
+      color: #fff;
+      & > a {
+        font-weight: bold;
+        color: #fff;
+       }
     }
   }
 }

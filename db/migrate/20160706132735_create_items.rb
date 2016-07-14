@@ -3,6 +3,7 @@ class CreateItems < ActiveRecord::Migration[5.0]
     create_table :items do |t|
       t.string :name
       t.references :folder, foreign_key: true
+      t.string :description
       t.string :asset
       t.string :guid
 

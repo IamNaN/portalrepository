@@ -6,7 +6,8 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = @folder ? @folder.items : Item.all
-    @item = Item.find(params[:item_id]) if params[:item_id].present?
+    @new_asset = Item.new.asset
+    @new_asset.success_action_redirect = new_item_url(folder_id: @folder.id)
   end
 
   # GET /items/1
@@ -16,8 +17,7 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @item = Item.new
-    @item.folder = Folder.first || Folder.create(name: 'root')
+    @item = Item.new(key: params[:key], folder_id: params[:folder_id])
   end
 
   # GET /items/1/edit
@@ -28,10 +28,11 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
+    @item.name = @item.filename
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to :back, notice: 'Item was successfully created.' }
+        format.html { redirect_to items_url(item_id: @item.id), notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -67,16 +68,18 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = Item.find(params[:id])
+      @item ||= Item.find(params[:id])
     end
 
     def set_folder
-      @folder = Folder.find(params[:folder_id]) if params[:folder_id].present?
+      @item ||= Item.find(params[:item_id]) if params[:item_id].present?
+      @folder = @item.folder if @item
+      @folder ||= Folder.find(params[:folder_id]) if params[:folder_id].present?
       @folder ||= Folder.first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :folder_id, :asset, :guid)
+      params.require(:item).permit(:name, :folder_id, :asset, :guid, :key, :description)
     end
 end

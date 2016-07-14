@@ -12,5 +12,9 @@ class Item < ApplicationRecord
   def path
     folder_path # + name
   end
+  
+  def filename
+    File.basename(asset.path || asset.filename) if asset
+  end
 
 end

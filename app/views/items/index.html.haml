@@ -4,17 +4,27 @@
 .col-sm-4.main
   %table.table.table-hover.table-condensed
     %thead
-      %th Name
+      %th 
+      %th File name
+      %th Description
       %th Date Created
     %tbody
       - @items.each do |item|
-        %tr
+        %tr{class: ('info selected' if @item && @item.id == item.id)}
+          %td= icon('caret-right') if @item && @item.id == item.id
           %td= link_to item.name, items_path(folder_id: @folder.id, item_id: item.id)
+          %td= link_to item.description, items_path(folder_id: @folder.id, item_id: item.id)
           %td= item.created_at.strftime '%b %e, %y, %l:%M %p'
   %br
-  = render 'form'
+  = direct_upload_form_for @new_asset, html: {class: 'form-horizontal new-file'} do |f|
+    .form-group
+      = f.label :asset, 'File', class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.file_field :asset
+
+    = f.submit 'Upload', class: 'btn btn-primary btn-xs'
 
 .col-sm-5.main
   - if @item
-    = link_to @item.asset.url(resource_type: "image", format: "#{@item.asset.format}.pdf") do
-      = cl_image_tag @item.asset.url(resource_type: "image", format: "#{@item.asset.format}.png"), class: 'img-responsive'
+    = link_to @item.asset.url do
+      = image_tag @item.asset.url, class: 'img-responsive'
