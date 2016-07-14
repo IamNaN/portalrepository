@@ -38,7 +38,8 @@ gem 'haml-rails'
 # gem 'capistrano-rails', group: :development
 
 gem 'ancestry'
-gem 'carrierwave'         # before cloudinary
+gem 'carrierwave'               # before cloudinary
+gem 'carrierwave-filepickerio'  # after carrierwave
 gem 'fog'                 # before cloudinary
 gem 'carrierwave_direct'  # after carrierwave
 

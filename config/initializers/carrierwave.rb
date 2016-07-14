@@ -1,4 +1,5 @@
 CarrierWave.configure do |config|
+  # config.filepickerio_api_key = ENV['FILEPICKER_API_KEY']
   config.fog_credentials = {
     provider: 'AWS',
     aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
